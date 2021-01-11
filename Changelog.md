@@ -13,6 +13,7 @@ Compiler Features:
  * SMTChecker: Support try/catch statements.
  * SMTChecker: Output internal and trusted external function calls in a counterexample's transaction trace.
  * SMTChecker: Synthesize untrusted functions called externally.
+ * Yul Optimizer: If all cases of a ``switch`` statement with a default case start with the same prefix, move that prefix out of the ``switch``.
 
 Bugfixes:
  * Code Generator: Fix length check when decoding malformed error data in catch clause.

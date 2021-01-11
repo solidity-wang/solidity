@@ -33,6 +33,7 @@
 #include <libyul/optimiser/ConditionalUnsimplifier.h>
 #include <libyul/optimiser/ConditionalSimplifier.h>
 #include <libyul/optimiser/CommonSubexpressionEliminator.h>
+#include <libyul/optimiser/CommonSwitchCasePrefixMover.h>
 #include <libyul/optimiser/NameCollector.h>
 #include <libyul/optimiser/EquivalentFunctionCombiner.h>
 #include <libyul/optimiser/ExpressionSplitter.h>
@@ -432,6 +433,11 @@ TestCase::TestResult YulOptimizerTest::run(ostream& _stream, string const& _line
 		FakeUnreachableGenerator fakeUnreachableGenerator;
 		fakeUnreachableGenerator(*obj.code);
 		StackLimitEvader::run(*m_context, obj, fakeUnreachableGenerator.fakeUnreachables);
+	}
+	else if (m_optimizerStep == "commonSwitchCasePrefixMover")
+	{
+		disambiguate();
+		CommonSwitchCasePrefixMover::run(*m_context, *m_object->code);
 	}
 	else
 	{
